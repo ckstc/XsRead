@@ -26,8 +26,8 @@
 ```
 {"Referer":"https://www.bqgbi.com","User-Agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/73.0.3683.75 Safari\/537.36"}
 ```
-	把Referer后面的网址替换为需要的网址，其他的不用管。
-	这个过程在正常访问网页时也有，但是是浏览器在后台完成的，不可见。
+把Referer后面的网址替换为需要的网址，其他的不用管。
+这个过程在正常访问网页时也有，但是是浏览器在后台完成的，不可见。
 
 ## 搜索书籍
 
