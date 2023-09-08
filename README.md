@@ -124,8 +124,8 @@ return {'url':url, 'POST':false, 'httpParams':hp
 
 - 请求信息`%@result`，就是书本详情页地址（detailUrl）对应的页面
 - 列表`//div[@class="section-box"][2]/ul/li`
-	标题`//a/text()`
-	下一级界面地址`//a/@href`
+标题`//a/text()`
+下一级界面地址`//a/@href`
 - 下一页地址`//div[@class="listpage"]/span[3]/a/@href`，有些网站章节分为多页，此时需要找到“下一页”的链接
 - 最后一章更新时间`//div[@class="detail-box"]//p[5]`
 - 响应解析方式`格式化为DOM（html）`
