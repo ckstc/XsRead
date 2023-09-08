@@ -57,9 +57,9 @@ return {'url':url, 'POST':false, 'httpParams':hp
 推荐第一种方式
 
 我们需要通过如下方式获取需要的信息以填写上述代码中的某些信息。
-![[Pasted image 20230905134319.png]]
+![image](https://github.com/ckstc/XsRead/blob/main/img/Pasted%20image%2020230905134319.png)
 
-![[Pasted image 20230905135006.png]]
+![image](https://github.com/ckstc/XsRead/blob/main/img/Pasted%20image%2020230905135006.png)
 
 有时候浏览器会显示链接为`https://www.bqgbi.com/s?q=都市`，有时为`https://www.bqgbi.com/s?q=%E9%83%BD%E5%B8%82`，可以看到`%E9%83%BD%E5%B8%82`和都市是同一个东西，只是编码问题，可自行百度。
 
@@ -81,9 +81,9 @@ return {'url':url, 'POST':false, 'httpParams':hp
 
 我们需要通过如下方式获取需要的信息以填写响应规则。
 
-![[Pasted image 20230905141521.png]]
+![image](https://github.com/ckstc/XsRead/blob/main/img/Pasted%20image%2020230905141521.png)
 
-![[Pasted image 20230905150535.png]]
+![image](https://github.com/ckstc/XsRead/blob/main/img/Pasted%20image%2020230905150535.png)
 
 上图第3和第4步是为了定位我们检索到的书籍列表对应的代码的，相应代码在“元素”标签下面。可以看到，代码前面有个小三角，这表示代码是一层一层展开的，类似于文件夹的结构。上一级称为父节点，下一级称为子节点。每行代码都有一对小括号`<></>`，分别表示开始和结束。`<>`中，div、h2、ul、li、span均为标签，`<>`中标签后的内容为标签的属性，如class表示标签的类，id表示标签的唯一身份标识（类似于身份证），括号中间的黑色字体就是我们在网页中看到的文字内容，也就是我们最终需要的内容。
 
