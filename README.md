@@ -164,7 +164,7 @@ return r;
 
 8. xbsrebuild使用方法//windows使用方式，（1）下载`xbsrebuild-windows-386.zip`，解压到特定目录，将exe重命名为`xbsrebuild.exe`；（2）windows11下，在该目录下右键并“在终端中打开”；（3）按照作者的说明，输入`.\xbsrebuild server`启动服务，不要关闭终端窗口；（4）将香色书源文件放在xbsrebuild.exe同一目录下，再次在该目录下右键并“在终端中打开”，打开另一个终端；（5）按照作者的说明，输入`.\xbsrebuild xbs2json -i xx.xbs -o xx.json`或者`.\xbsrebuild json2xbs -i xx.json -o xx.xbs`进行转换，其中“xx”需要自己改为对应名称，转换后的文件在同一目录下。`*.json`文件可以在`https://www.bejson.com/jsoneditoronline/`中格式化编辑。如果已经熟练了编写规则，可以使用这种方式在电脑上编辑书源完成大部分工作后，再在手机上测试调整。
 
-9. 不知道怎么用js语句replace()调整result的内容。由于Xpath只能定位和提取内容，所有对内容的操作只能由js进行，虽然网上有很多js教程，但是我暂时不会在香色中写js，照着写的很多时候完全不生效。
+9. 不知道怎么用js语句replace()调整result的内容。由于Xpath只能定位和提取内容，所有对内容的操作只能由js进行，虽然网上有很多js教程，但是我暂时不会在香色中写js，照着写的很多时候完全不生效。//错误引用了，xpath语句之后js开头应该是|@js:，也就是只有一个|而非两个
 
 ## 参考：
 
