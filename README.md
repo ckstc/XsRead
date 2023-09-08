@@ -169,7 +169,11 @@ return r;
 1. [XsRead/png/README.md at main · Fantuan-cell/XsRead (github.com)](https://github.com/Fantuan-cell/XsRead/blob/main/png/README.md)
 2. [p1书籍搜索_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1na411q77A?p=1)
 3. 【【阅读3.0】书源制作过程(基础语法)-哔哩哔哩】 https://b23.tv/TUMG3e5
-4. [ne1llee/xbsrebuild: 香色闺阁xbs书源加解密工具 (github.com)](https://github.com/ne1llee/xbsrebuild) 
+4. [ne1llee/xbsrebuild: 香色闺阁xbs书源加解密工具 (github.com)](https://github.com/ne1llee/xbsrebuild)
+5. [学爬虫利器XPath,看这一篇就够了](https://zhuanlan.zhihu.com/p/29436838)
+6. [手把手教你学会Xpath高级用法](https://zhuanlan.zhihu.com/p/32187820)
+7. [Xpath库](https://github.com/zhegexiaohuozi/JsoupXpath/blob/master/README.md)
+
 
 以下代码方便调试
 ```
