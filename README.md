@@ -149,7 +149,20 @@ return {'url':url, 'POST':false, 'httpParams':hp
 
 3. 忘了页面的编码方式在哪查看了。//已解决，在网页源代码的head标签里查看`charset`。
 
-4. 书籍分类还不知道怎么弄。
+4. 书籍分类还不知道怎么弄。//完成了最简单的写法
+```
+新建分类后
+请求信息如下：
+@js:
+let url =config.host+"/"+params.filters.type +"?" + params.pageIndex;
+
+let hh= {
+  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/13.0 Safari/604.1"
+}
+return {'url':url,"httpHeaders":hh};
+
+morekeys如下，只有一级页面：
+{"pageSize":20,"requestFilters":[{"key":"type","items":[{"title":"玄幻奇幻","value":"xh"},{"title":"修真武侠","value":"xz"},{"title":"都市言情","value":"ds"},{"title":"穿越历史","value":"cy"},{"title":"网游竞技","value":"wy"},{"title":"科幻灵异","value":"kh"},{"title":"完结","value":"wj"},{"title":"排行榜","value":"ph"}]}]}
 
 5. 搜索书籍时响应页面只有“加载中”而无内容，是因为网页时动态记载的。//已解决，需要在请求头的return中增加`webView:true,webViewJsDelay:3`
 
