@@ -164,7 +164,7 @@ return {'url':url,"httpHeaders":hh};
 morekeys如下，只有一级页面：
 {"pageSize":20,"requestFilters":[{"key":"type","items":[{"title":"玄幻奇幻","value":"xh"},{"title":"修真武侠","value":"xz"},{"title":"都市言情","value":"ds"},{"title":"穿越历史","value":"cy"},{"title":"网游竞技","value":"wy"},{"title":"科幻灵异","value":"kh"},{"title":"完结","value":"wj"},{"title":"排行榜","value":"ph"}]}]}
 ```
-    有时分类得到的detailUrl和搜索情况下得到的detailUrl不一样，如搜索的detailUrl有时没有config.host而，分类得到的detailUrl则有，此时需要分情况：
+有时分类得到的detailUrl和搜索情况下得到的detailUrl不一样，如搜索的detailUrl有时没有config.host而，分类得到的detailUrl则有，此时需要分情况：
 ```
 @js:
 if(params.queryInfo.detailUrl.match("http")=="http")//如果detailUrl带有http，也就是包含config.host
@@ -172,7 +172,7 @@ if(params.queryInfo.detailUrl.match("http")=="http")//如果detailUrl带有http�
 {let url = config.host+params.queryInfo.detailUrl+"all_"+params.pageIndex+"/";//否则，加上config.host。
 return url;}
 ```
-    
+
 5. 搜索书籍时响应页面只有“加载中”而无内容，是因为网页时动态记载的。//已解决，需要在请求头的return中增加`webView:true,webViewJsDelay:3`
 
 6. 控制台的“负载”显示`searchkey：（无法对值进行解码）`，且预览页面为乱码。//已解决，需要将书籍搜索的响应编码方式改为`简体中文（gb2312）`，尝试不同的解码方式。
