@@ -199,71 +199,15 @@ return r;
 7. [Xpath库](https://github.com/zhegexiaohuozi/JsoupXpath/blob/master/README.md)
 
 
-以下代码方便调试
 ```
-{"Referer":"https://www.69shuba.com","User-Agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/73.0.3683.75 Safari\/537.36"}
+一、格式化GET和POST请求
+以下文字直接给chatgpt：
 
-请求信息：
-@js:
-let url=config.host+"/s"; 
+我现在需要通过网站自带的搜索方法（GET或POST方法）进行搜索，并提取搜索结果的信息。（1）GET方法。我会给你一个网址，你只需要将其中的关键词替换为自定义的%@keyWord，页码替换为自定义的%@pageIndex，其他内容保持不变。例如,我给你https://www.xbiquwx.la/search.html?searchkey=都市&page=1&Submit=submit&t_botton=t ，你只需要替换其中的searchkey和page，你应该给我输出https://www.xbiquwx.la/search.html?searchkey=%@keyWord&page=%@pageIndex&Submit=submit&t_botton=t。请注意，searchkey也可能叫q、key等等；page必然是数字，当然page也可能叫index等等。你只需要给我输出替换后的网址，不需要你解释，网址单独一行显示，不要给网址加上双引号。（2）POST方法。我会给你一个网址和请求参数，你需要将格式化为指定形式。例如，我给你网址https://m.youdian5.com/s.php，请求参数为：keyword: 都市 t: 1；或者keyword=都市&t=1。其中，https://m.youdian5.com替换为自定义的config.host，然后将参数格式化为'keyword':params.keyWord,'t':'1'。格式化后以如下形式显示@js: let url=config.host+"/s.php"; let hh= {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/13.0 Safari/604.1" }; let hp= {'keyword':params.keyWord,'t':'1'}; return { 'url':url,'POST':true,'httpParams':hp,"httpHeaders": config.httpHeaders, "forbidCookie":true, //'requestParamsEncode':'', //'responseFormatType':'json', //'cacheTime':3600, //'tryCount':1, //"webView":true, //'webViewJs':'document.documentElement.outerHTML', //'webViewSkipUrls':['https://www.baidu.com'], //'sourceRegex':'.*\\.(mp3|m4a).*' }
 
-let hh= {
-  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/13.0 Safari/604.1"
-};
+二、提取书籍信息
 
-let hp= {'q':params.keyWord};
-
-return {'url':url, 'POST':false, 'httpParams':hp
-, "httpHeaders": config.httpHeaders,forbidCookie:true,webView:true,webViewJsDelay:3};
-
-
-列表（list）
-//div[@class="row"]//ul/li
-	- 书名（bookName）
-		//span[@class=“s2”]/a/text()
-	- 作者（author）
-		//span[@class=“s4”]/text()
-	- 类别（cat）
-		//span[@class=“s1”]/text()
-	- 最后一章标题（lastChapterTitle）
-		//span[@class=“s3”]/a/text()
-		这里实际上就是最新章节
-	- 书本详情页地址（detailUrl）
-		//span[@class=“s2”]/a/@href
-
-书籍详情
-- 请求信息
-	%@result
-	就是书本详情页地址（detailUrl）对应的页面
-- 图标
-	//div[@class="detail-box"]//img/@src
-- 简介
-	//div[@class="detail-box"]//div[@class="desc xs-hidden"]/text()
-
-章节列表
-- 请求信息
-	%@result
-- 列表
-	//div[@class="section-box"][2]/ul/li
-		标题
-			//a/text()
-		下一级界面地址
-			//a/@href
-- 下一页地址
-	//div[@class="listpage"]/span[3]/a/@href
-- 最后一章更新时间
-	//div[@class="detail-box"]//p[5]
-- moreKeys
-	{"maxPage":300}
-
-章节内容
-- 请求信息
-	%@result
-- 正文（content）
-	//div[@class="reader-main"]/div[@class="content"]/text()
-- 下一页地址
-	//div[@class="section-opt m-bottom-opt"]/a[contains(., \"下一页\")]/@href
-- moreKeys
-	{"maxPage":2}
+以下文字直接给chatgpt：
+我需要提取网页HTML源码中的书籍信息，包括：列表list；书名bookName；作者author；图标cover；简介desc；类别cat；状态status；字数wordCount；最后一章标题lastChapterTitle；书籍详情页地址detailUrl。不同网站对列表所使用的html标签有区别，通常列表使用的列表有ul、ol、dt、table，对应的列表项的标签有li、dd、tr，但是也有的网站仅适用div标签的id或class属性设为list、searchresult，有的甚至设置为其他不常见的字符如col。有两种方式处理html代码：第一种，通过xpath获得书籍信息，例如：list://ul[@class=="fk"]；bookName://a[2]/text()；author://a[3]/text()；cat://a[1]/text()；其中，所有书籍信息都位于list所在的标签之内，所以bookName等信息省略了list的表达式//ul[@class=="fk"]。第二种，通过JavaScript的正则表达式获取书籍信息。functionfunctionName(config,params,result){letlist=[];letreg=/%3Cli%3E<a(?:\S|\s)*?>(.*?)<\/a><ahref="(.*?)"(?:\S|\s)*?>(.*?)<\/a>(?:\S|\s)*?<ahref="(.*?)"(?:\S|\s)*?>(.*?)<\/a><\/li>/gim;while(tem=reg.exec(result)){letbookInfo={};bookInfo.cat=tem[1];bookInfo.detailUrl=tem[2];bookInfo.bookName=tem[3];bookInfo.author=tem[4];list.push(bookInfo)}return{'list':list}}其中config,params,result均为自定义参数，result即为html网页代码。接下来，我会给你HTML代码，请分别给我xpth和JavaScript代码。对于xpath，你只需要像我一样给出xpath表达式即可；对于JavaScript，你需要严格按照我给你的示例代码进行代码编写，不需要扩展。我在前面列了10项具体信息，如果我给你的HTML代码中没有，仍然显示，但是留空。
 ```
 
