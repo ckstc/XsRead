@@ -211,3 +211,50 @@ return r;
 我需要提取网页HTML源码中的书籍信息，包括：列表list；书名bookName；作者author；图标cover；简介desc；类别cat；状态status；字数wordCount；最后一章标题lastChapterTitle；书籍详情页地址detailUrl。不同网站对列表所使用的html标签有区别，通常列表使用的列表有ul、ol、dt、table，对应的列表项的标签有li、dd、tr，但是也有的网站仅适用div标签的id或class属性设为list、searchresult，有的甚至设置为其他不常见的字符如col。有两种方式处理html代码：第一种，通过xpath获得书籍信息，例如：list://ul[@class=="fk"]；bookName://a[2]/text()；author://a[3]/text()；cat://a[1]/text()；其中，所有书籍信息都位于list所在的标签之内，所以bookName等信息省略了list的表达式//ul[@class=="fk"]。第二种，通过JavaScript的正则表达式获取书籍信息。functionfunctionName(config,params,result){letlist=[];letreg=/%3Cli%3E<a(?:\S|\s)*?>(.*?)<\/a><ahref="(.*?)"(?:\S|\s)*?>(.*?)<\/a>(?:\S|\s)*?<ahref="(.*?)"(?:\S|\s)*?>(.*?)<\/a><\/li>/gim;while(tem=reg.exec(result)){letbookInfo={};bookInfo.cat=tem[1];bookInfo.detailUrl=tem[2];bookInfo.bookName=tem[3];bookInfo.author=tem[4];list.push(bookInfo)}return{'list':list}}其中config,params,result均为自定义参数，result即为html网页代码。接下来，我会给你HTML代码，请分别给我xpth和JavaScript代码。对于xpath，你只需要像我一样给出xpath表达式即可；对于JavaScript，你需要严格按照我给你的示例代码进行代码编写，不需要扩展。我在前面列了10项具体信息，如果我给你的HTML代码中没有，仍然显示，但是留空。
 ```
 
+```
+原生能力支持使用params.nativeTool，有以下几个功能：
+
+log(obj); // 打印log，key使用时间截
+logWithKey(obj, strKey); // 打印log并自定义key
+
+stringByObject(obj); // 将任意对象转换为字符串
+
+deviceId(); // 默认的本地设备id，32位md5小写
+deviceIdWithTemplateWithSeparator(strTemplate, strSeparator); // 自定义格式的本地设备id，strTemplate为模版，aaa-aa-aaaa，这里使用-分为3段，每段第一个字符将标识该段类型：0为纯数字，a为纯字母小写，A为纯字母大写，b为字符(数字+字母)小写，B为字符(数字+字母)大写，默认的deviceId模版即为：bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+base64Decode(str); // base64解码，返回字符串
+base64Encode(str); // base64编码，返回字符串
+base64EncodeWithData(data); // 对二进制流(NSData)base64编码，返回字符串
+
+readFile(strPath); // 从path中读取文件，返回二进制流
+readTxtFile(strPath); // 从path中读取文件，返回字符串
+unzipFile(strPath); // 解压zip文件，返回目录path
+unzipFileWithPassword(strPath, strPassword); // 使用密码解压zip文件，返回目录path
+allFilesAtPath(strDirPath); // 获取path目录下所有的文件path，返回数组:arr(path)
+
+getCache(strKey); // 获取全局缓存对象
+setCache(strKey, obj); // 设置全局缓存对象
+
+sha1Encode(str); // 返回sha1
+md5Encode(str); // 返回md5
+
+cookieByKey(str); // 返回字符串
+cookiesByUrl(url); // 返回数组
+
+XPathParserWithSource(str); // 创建XPath解析器，可用于下面XPath解析器专用接口
+
+
+XPath解析器接口有：
+raw(); // 返回原始html
+content(); // 返回内容
+tagName(); // 返回字符串
+attributes(); // 返回字典
+queryWithXPath(strXPath); // 返回查询结果，以数组保存
+```
+
+```
+看到一串代码：
+$.path ||@js: let ids = params.nativeTool.dataByAesDecryptWithBase64StringWithKeyWithIv(result, "f041c49714d39908", "0123456789abcdef") return params.nativeTool.stringByObject(ids)
+
+香色似乎还有其他加密解密函数？
+```
